@@ -10,14 +10,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $id_cliente
  * @property $monto
- * @property $interes
  * @property $tipo_pago
  * @property $cuotas
+ * @property $cuotas_actual
+ * @property $interes
+ * @property $valor_cuota
+ * @property $Total_a_pagar
+ * @property $Total_a_pagar_juros
+ * @property $saldo
  * @property $fecha_inicio
  * @property $fecha_final
+ * @property $estado
  * @property $created_at
  * @property $updated_at
  *
+ * @property Cliente $cliente
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -27,9 +34,14 @@ class Prestamo extends Model
     static $rules = [
 		'id_cliente' => 'required',
 		'monto' => 'required',
-		'interes' => 'required',
 		'tipo_pago' => 'required',
 		'cuotas' => 'required',
+		'cuotas_actual' => 'required',
+		'interes' => 'required',
+		'valor_cuota' => 'required',
+		'Total_a_pagar' => 'required',
+		'Total_a_pagar_juros' => 'required',
+		'saldo' => 'required',
     ];
 
     protected $perPage = 20;
@@ -39,14 +51,16 @@ class Prestamo extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_cliente','monto','interes','tipo_pago','cuotas','fecha_inicio','fecha_final'];
+    protected $fillable = ['id_cliente','monto','tipo_pago','cuotas','cuotas_actual','interes','valor_cuota','Total_a_pagar','Total_a_pagar_juros','saldo','fecha_inicio','fecha_final','estado'];
 
-    // Relación con el modelo Cliente
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'id_cliente');
+        return $this->hasOne('App\Models\Cliente', 'id', 'id_cliente');
     }
-
-
+    
 
 }

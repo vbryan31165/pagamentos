@@ -22,11 +22,13 @@ export default defineConfig({
         })
     ],
     server: {
-        hmr: {
-            host: 'localhost',
-            protocol: 'ws',
-            port: 3000
-        }
+    host: '0.0.0.0', // <- Permite acceso externo
+    port: 5173,
+    hmr: {
+        host: '192.168.15.21', // <- Tu IP LAN real (la que usas en tu iPhone)
+        protocol: 'ws',
+    },
+
     },
     build: {
         commonjsOptions: {

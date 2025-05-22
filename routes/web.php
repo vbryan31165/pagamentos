@@ -19,3 +19,5 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::resource('/pagos', PagoController::class);
 Route::resource('/clientes', ClienteController::class);
 Route::resource('/prestamos', PrestamoController::class);
+Route::resource('/prestamo', App\Http\Controllers\PrestamoController::class);
+Route::resource('/prestamo', App\Http\Controllers\PrestamoController::class);

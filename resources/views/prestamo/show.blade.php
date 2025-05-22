@@ -58,10 +58,6 @@
 {{ $prestamo->monto }}
 </div>
 <div class="form-group">
-<strong>Interes:</strong>
-{{ $prestamo->interes }}
-</div>
-<div class="form-group">
 <strong>Tipo Pago:</strong>
 {{ $prestamo->tipo_pago }}
 </div>
@@ -70,12 +66,40 @@
 {{ $prestamo->cuotas }}
 </div>
 <div class="form-group">
+<strong>Cuotas Actual:</strong>
+{{ $prestamo->cuotas_actual }}
+</div>
+<div class="form-group">
+<strong>Interes:</strong>
+{{ $prestamo->interes }}
+</div>
+<div class="form-group">
+<strong>Valor Cuota:</strong>
+{{ $prestamo->valor_cuota }}
+</div>
+<div class="form-group">
+<strong>Total A Pagar:</strong>
+{{ $prestamo->Total_a_pagar }}
+</div>
+<div class="form-group">
+<strong>Total A Pagar Juros:</strong>
+{{ $prestamo->Total_a_pagar_juros }}
+</div>
+<div class="form-group">
+<strong>Saldo:</strong>
+{{ $prestamo->saldo }}
+</div>
+<div class="form-group">
 <strong>Fecha Inicio:</strong>
 {{ $prestamo->fecha_inicio }}
 </div>
 <div class="form-group">
 <strong>Fecha Final:</strong>
 {{ $prestamo->fecha_final }}
+</div>
+<div class="form-group">
+<strong>Estado:</strong>
+{{ $prestamo->estado }}
 </div>
 
                         </div>

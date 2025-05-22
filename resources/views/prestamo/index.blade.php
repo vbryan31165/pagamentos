@@ -85,13 +85,19 @@
                                         </svg>
                                     </th>
                                     
-										<th>Id Cliente</th>
+										<th>Cliente</th>
 										<th>Monto</th>
-										<th>Interes</th>
 										<th>Tipo Pago</th>
 										<th>Cuotas</th>
+										<th>Cuotas Actual</th>
+										<th>Interes</th>
+										<th>Valor Cuota</th>
+										<th>Total A Pagar</th>
+										<th>Total A Pagar Juros</th>
+										<th>Saldo</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Final</th>
+										<th>Estado</th>
 
                                     <th class="w-1"></th>
                                 </tr>
@@ -106,11 +112,17 @@
                                         
 											<td>{{ $prestamo->cliente->nombres }}</td>
 											<td>{{ $prestamo->monto }}</td>
-											<td>{{ $prestamo->interes }}</td>
 											<td>{{ $prestamo->tipo_pago }}</td>
 											<td>{{ $prestamo->cuotas }}</td>
+											<td>{{ $prestamo->cuotas_actual }}</td>
+											<td>{{ $prestamo->interes }} %</td>
+											<td>{{ $prestamo->valor_cuota }}</td>
+											<td>{{ $prestamo->Total_a_pagar }}</td>
+											<td>{{ $prestamo->Total_a_pagar_juros }}</td>
+											<td>{{ $prestamo->saldo }}</td>
 											<td>{{ $prestamo->fecha_inicio }}</td>
 											<td>{{ $prestamo->fecha_final }}</td>
+											<td>{{ $prestamo->estado }}</td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">

@@ -14,12 +14,19 @@ return new class extends Migration
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
             $table->foreignId("id_cliente")->constrained('clientes');
+            $table->foreignId("id_usuario")->constrained('users');
             $table->decimal("monto",10,2);
-            $table->decimal("interes",5,2);
             $table->integer("tipo_pago");
             $table->integer("cuotas");
-            $table->timestamp('fecha_inicio')->nullable();
-            $table->timestamp('fecha_final')->nullable();
+            $table->integer("cuotas_actual");
+            $table->decimal("interes",10,2);
+            $table->decimal("valor_cuota",10,2);
+            $table->decimal("Total_a_pagar",10,2);
+            $table->decimal("Total_a_pagar_juros",10,2);
+            $table->decimal("saldo",10,2);
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_final')->nullable();
+            $table->integer('estado')->nullable();            
             $table->timestamps();
         });
     }
