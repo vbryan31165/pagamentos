@@ -33,6 +33,7 @@ class Prestamo extends Model
     
     static $rules = [
 		'id_cliente' => 'required',
+    'id_usuario' => 'required',
 		'monto' => 'required',
 		'tipo_pago' => 'required',
 		'cuotas' => 'required',
@@ -51,7 +52,7 @@ class Prestamo extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_cliente','monto','tipo_pago','cuotas','cuotas_actual','interes','valor_cuota','Total_a_pagar','Total_a_pagar_juros','saldo','fecha_inicio','fecha_final','estado'];
+    protected $fillable = ['id_cliente','id_usuario','monto','tipo_pago','cuotas','cuotas_actual','interes','valor_cuota','Total_a_pagar','Total_a_pagar_juros','saldo','fecha_inicio','fecha_final','estado'];
 
 
     /**

@@ -1,10 +1,30 @@
 <div class="form-group mb-3">
-    <label class="form-label"> {{ Form::label('id_cliente') }}</label>
+    <label class="form-label">Cliente</label>
+    <select
+        name="id_cliente"
+        class="form-control {{ $errors->has('id_cliente') ? 'is-invalid' : '' }}">
+        <option value="" selected disabled>Seleccione un cliente...</option>
+        @foreach($clientes as $cliente)
+        <option value="{{ $cliente->id }}" {{ old('id_cliente', $prestamo->id_cliente ?? '') == $cliente->id ? 'selected' : '' }}>
+            {{ $cliente->nombres }} <!-- Solo muestra el nombre -->
+        </option>
+        @endforeach
+    </select>
+    @error('id_cliente')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+<div class="form-group mb-3">
+    <!-- <label class="form-label">{{ Form::label('id_usuario', 'Usuario') }}</label> -->
     <div>
-        {{ Form::text('id_cliente', $prestamo->id_cliente, ['class' => 'form-control' .
-        ($errors->has('id_cliente') ? ' is-invalid' : ''), 'placeholder' => 'Id Cliente']) }}
-        {!! $errors->first('id_cliente', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">prestamo <b>id_cliente</b> instruction.</small>
+        <!-- Input oculto (hidden) con el valor por defecto '1' -->
+        {{ Form::hidden('id_usuario', '1') }}
+
+        <!-- Mensaje de error (se mostrará si hay problemas con el campo oculto) -->
+        {!! $errors->first('id_usuario', '<div class="invalid-feedback">:message</div>') !!}
+
+        <!-- Texto opcional para referencia (si lo necesitas) -->
+        <small class="form-hint" style="display: none;">Cliente asignado: <b>Bryan</b> (ID: 1).</small>
     </div>
 </div>
 <div class="form-group mb-3">
@@ -109,7 +129,7 @@
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('fecha_inicio') }}</label>
+    <label class="form-label"> {{ Form::label('fecha_inicio') }}</label>
     <div>
         {{ Form::date('fecha_inicio', $prestamo->fecha_inicio, ['class' => 'form-control' .
         ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}
@@ -118,7 +138,7 @@
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('fecha_final') }}</label>
+    <label class="form-label"> {{ Form::label('fecha_final') }}</label>
     <div>
         {{ Form::date('fecha_final', $prestamo->fecha_final, ['class' => 'form-control' .
         ($errors->has('fecha_final') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Final']) }}
@@ -126,14 +146,11 @@
         <small class="form-hint">prestamo <b>fecha_final</b> instruction.</small>
     </div>
 </div>
-<div class="form-group mb-3">
-    <label class="form-label"> {{ Form::label('estado') }}</label>
-    <div>
-        {{ Form::text('estado', $prestamo->estado, ['class' => 'form-control' .
-        ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+<div class="form-group mb-3" style="display: none;"> <!-- Oculta todo el grupo -->
+    {{ Form::hidden('estado', '1') }} <!-- Input oculto con valor "1" -->
+    @if($errors->has('estado')) <!-- Manejo de errores (oculto pero funcional) -->
         {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">prestamo <b>estado</b> instruction.</small>
-    </div>
+    @endif
 </div>
 
 <div class="form-footer">
@@ -165,34 +182,34 @@
             const interesVal = 0.2;
 
             cuotas.value = cuotasVal;
-            cuotas.readOnly  = true;
+            cuotas.readOnly = true;
 
             cuotasActual.value = 0;
-            cuotasActual.readOnly  = true;
+            cuotasActual.readOnly = true;
 
             interes.value = interesVal * 100;
-            interes.readOnly  = true;
+            interes.readOnly = true;
 
             const valorCuotaVal = ((montoVal * interesVal) + montoVal) / cuotasVal;
             valorCuota.value = valorCuotaVal.toFixed(2);
-            valorCuota.readOnly  = true;
+            valorCuota.readOnly = true;
 
             totalPagar.value = montoVal.toFixed(2);
-            totalPagar.readOnly  = true;
+            totalPagar.readOnly = true;
 
             const totalConJurosVal = valorCuotaVal * cuotasVal;
             totalConJuros.value = totalConJurosVal.toFixed(2);
-            totalConJuros.readOnly  = true;
+            totalConJuros.readOnly = true;
 
             saldo.value = totalConJurosVal.toFixed(2);
-            saldo.readOnly  = true;
+            saldo.readOnly = true;
 
             if (fechaInicio && fechaFinal) {
                 const inicio = new Date(fechaInicio.value);
                 if (!isNaN(inicio.getTime())) {
                     inicio.setDate(inicio.getDate() + cuotasVal);
                     fechaFinal.value = inicio.toISOString().slice(0, 10);
-                    fechaFinal.readOnly  = true;
+                    fechaFinal.readOnly = true;
                 }
             }
         }
@@ -200,6 +217,6 @@
         tipoPago.addEventListener('change', calcular);
         monto.addEventListener('input', calcular);
         fechaInicio.addEventListener('change', calcular);
-        
+
     });
 </script>

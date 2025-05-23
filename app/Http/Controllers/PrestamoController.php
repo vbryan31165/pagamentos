@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Prestamo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PrestamoController
@@ -18,7 +21,12 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos = Prestamo::paginate(10);
+        $userId = Auth::id(); // ID del usuario logueado (usuario)
+
+        // Obtener los préstamos filtrados por el cliente logueado
+        $prestamos = Prestamo::where('id_usuario', $userId)->paginate(10);
+        //$prestamos = Prestamo::paginate(10);
+        error_log($prestamos);
 
         return view('prestamo.index', compact('prestamos'))
             ->with('i', (request()->input('page', 1) - 1) * $prestamos->perPage());
@@ -32,7 +40,10 @@ class PrestamoController extends Controller
     public function create()
     {
         $prestamo = new Prestamo();
-        return view('prestamo.create', compact('prestamo'));
+        $usuarios = User::pluck('name', 'id'); // Trae id => name
+        $clientes = Cliente::all();
+        error_log($clientes);
+        return view('prestamo.create', compact('prestamo','usuarios','clientes'));
     }
 
     /**
